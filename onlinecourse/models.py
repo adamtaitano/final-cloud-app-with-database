@@ -116,7 +116,7 @@ class Question(models.Model):
        else:
            return False
 
-     def __str__(self):
+    def __str__(self):
         return self.content 
 
 
@@ -130,7 +130,7 @@ class Choice(models.Model):
     choice = models.ManyToManyField(Question)
     content = models.TextField(max_length=1000)
     # Indicate if this choice of the question is a correct one or not
-    is_correct = models.BooleanField(default=false)
+    is_correct = models.BooleanField(default=False)
 
     def __str__(self):
         return self.content 
