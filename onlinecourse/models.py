@@ -99,11 +99,11 @@ class Enrollment(models.Model):
     # Used to persist question content for a course
 class Question(models.Model):
     # Has a One-To-Many (or Many-To-Many if you want to reuse questions) relationship with course
-    question = models.ManyToManyField(Course)
+    course = models.ForeignKey(Course, default=None, on_delete=models.CASCADE)
     # question text content     # Has question content
-    content = models.TextField(max_length=1000)
+    content = models.TextField(max_length=500, default="title")
     # Has a grade point for each question   # question grade/mark # Has a grade point for each question
-    grade = models.IntegerField(default=0)
+    grade = models.FloatField(default=0)
     # Foreign key to lesson
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
@@ -127,8 +127,8 @@ class Question(models.Model):
     # Other fields and methods you would like to design
 class Choice(models.Model):
     # One-To-Many (or Many-To-Many if you want to reuse choices) relationship with Question Choice content
-    choice = models.ManyToManyField(Question)
-    content = models.TextField(max_length=1000)
+    question = models.ForeignKey(Question, default=None, on_delete=models.CASCADE)
+    content = models.TextField(max_length=100, default="title")
     # Indicate if this choice of the question is a correct one or not
     is_correct = models.BooleanField(default=False)
 
